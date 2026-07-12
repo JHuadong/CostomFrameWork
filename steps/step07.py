@@ -10,6 +10,14 @@ class Variable:
     def set_creator(self, func):
         self.creator = func
 
+    def backward(self):
+        f = self.creator # 1. Get function
+        if f is not None:
+            x = f.input  # 2. Retrieving the function’s input
+            x.grad = f.backward(self.grad) # 3. Call the function’s `backward` method
+            x.backward() # 4. Call the `backward` method of the previous variable (recursively)
+
+
 class Function:
     def __call__(self, input):
         x = input.data
@@ -54,14 +62,10 @@ def main():
     a = A(x)
     b = B(a)
     y = C(b)
-
-    # 反向遍历计算图的节点
-    assert y.creator == C
-    assert y.creator.input == b
-    assert y.creator.input.creator == B
-    assert y.creator.input.creator.input == a
-    assert y.creator.input.creator.input.creator == A
-    assert y.creator.input.creator.input.creator.input == x
+    # 反向传播
+    y.grad = np.array(1.0)
+    y.backward()
+    print(x.grad)
 
 
 if __name__ == '__main__':
