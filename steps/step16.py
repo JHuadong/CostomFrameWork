@@ -9,6 +9,10 @@ class Variable:
         self.data = data
         self.grad = None
         self.creator = None
+        self.generation = 0
+
+    def cleargrad(self):
+        self.grad = None
 
     def set_creator(self, func):
         self.creator = func
@@ -20,11 +24,20 @@ class Variable:
         funcs = [self.creator]
         while funcs:
             f = funcs.pop() # Get function
-            x, y = f.input, f.output # Retrieving the function’s input
-            x.grad = f.backward(y.grad) # backward — calls the backward method
+            gys = [output.grad for output in f.outputs]
+            gxs = f.backward(*gys)
+            if not isinstance(gxs, tuple):
+                gxs = (gxs,)
 
-            if x.creator is not None:
-                funcs.append(x.creator)
+            for x, gx in zip(f.inputs, gxs):
+                if x.grad is None:
+                    x.grad = gx
+                else:
+                    x.grad = x.grad + gx
+
+                if x.creator is not None:
+                    funcs.append(x.creator)
+
 
 class Function:
     def __call__(self, *inputs):
@@ -51,8 +64,24 @@ class Add(Function):
         y = x0 + x1
         return y
 
+    def backward(self, gy):
+        return gy, gy
+
+class Square(Function):
+    def forward(self, x):
+        y = x ** 2
+        return y
+
+    def backward(self, gy):
+        x = self.inputs[0].data
+        gx = 2 * x * gy
+        return gx
+
 def add(x0, x1):
     return Add()(x0, x1)
+
+def square(x):
+    return Square()(x)
 
 def as_array(x):
     if np.isscalar(x):
@@ -60,8 +89,10 @@ def as_array(x):
     return x
 
 if __name__ == "__main__":
-    xs = [Variable(np.array(2)), Variable(np.array(3))]  # 初始化为列表
-    f = Add()
-    ys = f(xs)  # ys是元组
-    y = ys[0]
-    print(y.data)
+    x = Variable(np.array(2.0))
+    y = Variable(np.array(3.0))
+    z = add(square(x), square(y))
+    z.backward()
+    print(z.data)
+    print(x.grad)
+    print(y.grad)
