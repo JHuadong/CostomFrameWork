@@ -116,6 +116,7 @@ class Function:
     def __call__(self, *inputs):
         inputs = [as_variable(x) for x in inputs]
 
+
         xs = [x.data for x in inputs]
         ys = self.forward(*xs)  # Use an asterisk to unpack
         if not isinstance(ys, tuple): # Additional handling for non-tuple cases
@@ -165,6 +166,7 @@ class Mul(Function):
         return gy * x1, gy * x0
 
 def mul(x0, x1):
+    x1 = as_array(x1)
     return Mul()(x0, x1)
 
 
@@ -177,7 +179,7 @@ def square(x):
 
 def as_array(x):
     if np.isscalar(x):
-        return np.array([x])
+        return np.array(x)
     return x
 
 def as_variable(obj):
@@ -187,8 +189,5 @@ def as_variable(obj):
 
 if __name__ == "__main__":
     x = Variable(np.array(2.0))
-    a = square(x)
-    y = add(square(a), square(a))
-    y.backward()
-    print(y.data)
-    print(x.grad)
+    y = x * 3.0 + 1.0
+    print(y)
