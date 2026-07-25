@@ -51,7 +51,7 @@ def get_dot_graph(output, verbose=False):
 
     return 'digraph g {\n' + txt + '}'
 
-def plot_dot_graph(output, verbose=True, to_file='graph.png'):
+def plot_dot_graph(output, verbose=True, to_file='graph.png', from_file='tmp_graph.dot'):
     dot_graph = get_dot_graph(output, verbose)
 
     # ①Save the dot data to a file
@@ -60,7 +60,7 @@ def plot_dot_graph(output, verbose=True, to_file='graph.png'):
     # print(tmp_dir)
     if not os.path.exists(tmp_dir): # If the ~/.dezero directory does not exist, create it.
         os.mkdir(tmp_dir)
-    graph_path = os.path.join(tmp_dir, 'tmp_graph.dot')
+    graph_path = os.path.join(tmp_dir, from_file)
     # print(graph_path)
 
     with open(graph_path, 'w', encoding='utf-8') as f:
