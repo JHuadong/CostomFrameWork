@@ -63,7 +63,7 @@ class Variable:
         self.creator = func
         self.generation = func.generation + 1
 
-    def backward(self, retain_grad=False):
+    def backward(self, retain_grad=False, create_graph=False):
         if self.grad is None:
             # self.grad = np.ones_like(self.data)
             self.grad = Variable(np.ones_like(self.data))
@@ -82,22 +82,24 @@ class Variable:
         while funcs:
             f = funcs.pop() # Get function
             gys = [output().grad for output in f.outputs]
-            gxs = f.backward(*gys)
-            if not isinstance(gxs, tuple):
-                gxs = (gxs,)
 
-            for x, gx in zip(f.inputs, gxs):
-                if x.grad is None:
-                    x.grad = gx
-                else:
-                    x.grad = x.grad + gx
+            with using_config('enable_backprop', create_graph):
+                gxs = f.backward(*gys)  # Main backward processing
+                if not isinstance(gxs, tuple):
+                    gxs = (gxs,)
 
-                if x.creator is not None:
-                    add_func(x.creator)
+                for x, gx in zip(f.inputs, gxs):
+                    if x.grad is None:
+                        x.grad = gx
+                    else:
+                        x.grad = x.grad + gx
 
-            if not retain_grad:
-                for y in f.outputs:
-                    y().grad = None
+                    if x.creator is not None:
+                        add_func(x.creator)
+
+                if not retain_grad:
+                    for y in f.outputs:
+                        y().grad = None
 
 
 class Function:
@@ -145,7 +147,7 @@ class Pow(Function):
         return y
 
     def backward(self, gy):
-        x = self.inputs[0].data
+        x = self.inputs[0]
         c = self.c
         gx = c * x ** (c - 1) * gy
         return gx
@@ -165,7 +167,7 @@ class Mul(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs[0].data, self.inputs[1].data
+        x0, x1 = self.inputs
         return gy * x1, gy * x0
 
 class Neg(Function):
@@ -234,3 +236,22 @@ def setup_variable():
     Variable.__truediv__ = div
     Variable.__rtruediv__ = rdiv
     Variable.__pow__ = pow
+
+if __name__ == "__main__":
+    import numpy as np
+    from dezero import Variable
+
+
+    def f(x):
+        y = x ** 4 - 2 * x ** 2
+        return y
+
+
+    x = Variable(np.array(2.0))
+    y = f(x)
+    y.backward(create_graph=True)
+    print(x.grad)
+    gx = x.grad
+    x.cleargrad()
+    gx.backward()
+    print(x.grad)
