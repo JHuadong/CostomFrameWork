@@ -1,6 +1,7 @@
 import numpy as np
 import weakref
 import contextlib
+import dezero
 
 
 @contextlib.contextmanager
@@ -56,12 +57,27 @@ class Variable:
     def dtype(self):
         return self.data.dtype
 
+    @property
+    def T(self):
+        return dezero.functions.transpose(self)
+
     def cleargrad(self):
         self.grad = None
 
     def set_creator(self, func):
         self.creator = func
         self.generation = func.generation + 1
+
+    def reshape(self, *shape):
+        if len(shape) == 1 and isinstance(shape[0], (tuple, list)):
+            shape = shape[0]
+        return dezero.functions.reshape(self, shape)
+
+    def transpose(self):
+        return dezero.functions.transpose(self)
+
+    def sum(self, axis=None, keepdims=False):
+        return dezero.functions.sum(self, axis, keepdims)
 
     def backward(self, retain_grad=False, create_graph=False):
         if self.grad is None:
@@ -133,7 +149,7 @@ class Div(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs[0].data, self.inputs[1].data
+        x0, x1 = self.inputs
         gx0 = gy / x1
         gx1 = gy * (-x0 / x1 ** 2)
         return gx0, gx1
@@ -223,7 +239,7 @@ def as_array(x):
 def as_variable(obj):
     if isinstance(obj, Variable):
         return obj
-    return Variable(obj)
+    return Variable(as_array(obj))
 
 def setup_variable():
     Variable.__add__ = add
@@ -238,20 +254,7 @@ def setup_variable():
     Variable.__pow__ = pow
 
 if __name__ == "__main__":
-    import numpy as np
-    from dezero import Variable
-
-
-    def f(x):
-        y = x ** 4 - 2 * x ** 2
-        return y
-
-
-    x = Variable(np.array(2.0))
-    y = f(x)
-    y.backward(create_graph=True)
-    print(x.grad)
-    gx = x.grad
-    x.cleargrad()
-    gx.backward()
-    print(x.grad)
+    x = Variable(np.random.randn(1, 2, 3))
+    y = x.reshape((2, 3))
+    print(type(y.data))
+    y = x.reshape(2, 3)

@@ -1,5 +1,11 @@
 import numpy as np
+from numpy.ma.core import transpose
+
+from dezero.core import as_variable
 from dezero.core import Function
+from dezero import utils
+
+
 class Sin(Function):
     def forward(self, x):
         y = np.sin(x)
@@ -39,16 +45,57 @@ class Tanh(Function):
 def tanh(x):
     return Tanh()(x)
 
-if __name__ == "__main__":
-    import numpy as np
-    from dezero import Variable
-    import dezero.functions as F
+class Reshape(Function):
+    def __init__(self, shape):
+        self.shape = shape
 
-    x = Variable(np.array(1.0))
-    y = F.sin(x)
-    y.backward(create_graph=True)
-    for i in range(3):
-        gx = x.grad
-        x.cleargrad()
-        gx.backward(create_graph=True)
-        print(x.grad)  # n阶导数
+    def forward(self, x):
+        self.x_shape = x.shape
+        y = x.reshape(self.shape)
+        return y
+
+    def backward(self, gy):
+        return reshape(gy, self.x_shape)
+
+def reshape(x, shape):
+    if x.shape == shape:
+        return as_variable(x)
+    return Reshape(shape)(x)
+
+class Transpose(Function):
+    def __init__(self, axes=None):
+        self.axes = axes
+
+    def forward(self, x):
+        y = x.transpose(self.axes)
+        return y
+
+    def backward(self, gy):
+        if self.axes is None:
+            return transpose(gy)
+
+        axes_len = len(self.axes)
+        inv_axes = tuple(np.argsort([ax % axes_len for ax in self.axes]))
+        return transpose(gy, inv_axes)
+
+
+def transpose(x, axes=None):
+    return Transpose(axes)(x)
+
+class Sum(Function):
+    def __init__(self, axis, keepdims=False):
+        self.axis = axis
+        self.keepdims = keepdims
+
+    def forward(self, x):
+        self.x_shape = x.shape
+        y = x.sum(axis=self.axis, keepdims=self.keepdims)
+        return y
+
+    def backward(self, gy):
+        gy = utils.reshape_sum_backward(gy, self.x_shape, self.axis, self.keepdims)
+        gx = broadcast_to(gy, self.x_shape)
+        return gx
+
+def sum(x, axis=None, keepdims=False):
+    return Sum(axis, keepdims)(x)
