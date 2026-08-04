@@ -1,0 +1,23 @@
+digraph g {
+1930403832192 [label="(5, 10) float64", color=orange, style=filled]
+1930402522720 [label="Linear", color=lightblue, style=filled, shape=box]
+1930387892048 -> 1930402522720
+1930403787168 -> 1930402522720
+1930403787216 -> 1930402522720
+1930402522720 -> 1930403832192
+1930387892048 [label="(5, 100) float64", color=orange, style=filled]
+1930403787168 [label="W: (100, 10) float64", color=orange, style=filled]
+1930403787216 [label="b: (10,) float32", color=orange, style=filled]
+1930403787840 [label="Sigmoid", color=lightblue, style=filled, shape=box]
+1930402190672 -> 1930403787840
+1930403787840 -> 1930387892048
+1930402190672 [label="(5, 100) float64", color=orange, style=filled]
+1930403626832 [label="Linear", color=lightblue, style=filled, shape=box]
+1930402677104 -> 1930403626832
+1930403625344 -> 1930403626832
+1930399899024 -> 1930403626832
+1930403626832 -> 1930402190672
+1930402677104 [label="x: (5, 10) float64", color=orange, style=filled]
+1930403625344 [label="W: (10, 100) float64", color=orange, style=filled]
+1930399899024 [label="b: (100,) float32", color=orange, style=filled]
+}
