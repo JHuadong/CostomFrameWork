@@ -19,6 +19,7 @@ else:
     from dezero.core import Parameter
 
     from dezero.datasets import Dataset
+    from dezero.dataloaders import DataLoader
     from dezero.layers import Layer
     from dezero.models import Model
 
