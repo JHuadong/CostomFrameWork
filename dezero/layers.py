@@ -1,5 +1,5 @@
 from dezero.core import Parameter
-from dezero.core import Variable
+from dezero import cuda
 import numpy as np
 import weakref
 import dezero.functions as F
@@ -37,6 +37,14 @@ class Layer:
         for param in self.params():
             param.cleargrad()
 
+    def to_cpu(self):
+        for param in self.params():
+            param.to_cpu()
+
+    def to_gpu(self):
+        for param in self.params():
+            param.to_gpu()
+
 class Linear(Layer):
     def __init__(self, out_size, nobias=False, dtype=np.float32, in_size=None):
         super().__init__()
@@ -55,31 +63,31 @@ class Linear(Layer):
             self.b = Parameter(np.zeros(out_size, dtype=dtype), name='b')
 
     def forward(self, x):
-        # Initialise weights when propagating data
         if self.W.data is None:
             self.in_size = x.shape[1]
-            self._init_W()
+            xp = cuda.get_array_module(x)
+            self._init_W(xp)
 
         y = F.linear(x, self.W, self.b)
         return y
 
-    def _init_W(self):
+    def _init_W(self, xp=np):
         I, O = self.in_size, self.out_size
-        W_data = np.random.randn(I, O).astype(self.dtype) * np.sqrt(1 / I)
+        W_data = xp.random.randn(I, O).astype(self.dtype) * np.sqrt(1 / I)
         self.W.data = W_data
 
 
 if __name__ == '__main__':
     import dezero.layers as L
     import dezero.functions as F
-    from dezero import Layer
+    from dezero import Layer, cuda
 
     model = Layer()
-    model.l1 = L.Linear(5)  # 只指定输出大小
+    model.l1 = L.Linear(5)  # only output the size
     model.l2 = L.Linear(3)
 
 
-    # 进行推理的函数
+    # function used to reason
     def predict(model, x):
         y = model.l1(x)
         y = F.sigmoid(y)
@@ -87,8 +95,8 @@ if __name__ == '__main__':
         return y
 
 
-    # 访问所有参数
+    # check all parameters
     for p in model.params():
         print(p)
-    # 重置所有参数的梯度
+    # reset the parameters of all layers
     model.cleargrads()

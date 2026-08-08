@@ -1,10 +1,6 @@
-import dezero
-import pathlib
-
+import cupy as cp
 if __name__ == '__main__':
-    train_set = dezero.datasets.MNIST(train=True, transform=None)
-    test_set = dezero.datasets.MNIST(train=False, transform=None)
-
-    print(len(train_set))
-    print(len(test_set))
-    #print()
+    x = cp.arange(6).reshape(2, 3)
+    print(x)
+    y = x.sum(axis=1)
+    print(y)
