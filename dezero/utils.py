@@ -153,9 +153,7 @@ def show_progress(block_num, block_size, total_size):
     bar = "#" * i + "." * (30 - i)
     print(bar_template.format(bar, p), end='')
 
-cache_dir = pathlib.Path(__file__).parent.parent.absolute() / 'minst'
-
-def get_file(url, file_name=None):
+def get_file(url, cache_dir=pathlib.Path(__file__).parent.parent.absolute() / 'minst', file_name=None):
     """Download a file from the `url` if it is not in the cache.
 
     The file at the `url` is downloaded to the `~/.dezero`.
@@ -167,6 +165,7 @@ def get_file(url, file_name=None):
 
     Returns:
         str: Absolute path to the saved file.
+        :param cache_dir:
     """
     if file_name is None:
         file_name = url[url.rfind('/') + 1:]
@@ -198,6 +197,12 @@ def pair(x):
         return x
     else:
         raise ValueError
+
+def get_conv_outsize(input_size, kernel_size, stride, pad):
+    return (input_size + pad * 2 - kernel_size) // stride + 1
+
+def get_deconv_outsize(size, k, s, p):
+    return s * (size - 1) + k - 2 * p
 
 
 if __name__ == '__main__':
