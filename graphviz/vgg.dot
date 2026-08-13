@@ -1,239 +1,239 @@
 digraph g {
-2765378807920 [label="(1, 1000) float32", color=orange, style=filled]
-2765378807728 [label="Linear", color=lightblue, style=filled, shape=box]
-2765378807824 -> 2765378807728
-2765378681792 -> 2765378807728
-2765378681840 -> 2765378807728
-2765378807728 -> 2765378807920
-2765378807824 [label="(1, 4096) float32", color=orange, style=filled]
-2765378681792 [label="W: (4096, 1000) float32", color=orange, style=filled]
-2765378681840 [label="b: (1000,) float32", color=orange, style=filled]
-2765378807584 [label="Div", color=lightblue, style=filled, shape=box]
-2765378807680 -> 2765378807584
-2765378807776 -> 2765378807584
-2765378807584 -> 2765378807824
-2765378807680 [label="(1, 4096) float32", color=orange, style=filled]
-2765378807776 [label="() float32", color=orange, style=filled]
-2765378807488 [label="Mul", color=lightblue, style=filled, shape=box]
-2765378807536 -> 2765378807488
-2765378807632 -> 2765378807488
-2765378807488 -> 2765378807680
-2765378807536 [label="(1, 4096) float32", color=orange, style=filled]
-2765378807632 [label="(1, 4096) bool", color=orange, style=filled]
-2765378798128 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378798224 -> 2765378798128
-2765378798128 -> 2765378807536
-2765378798224 [label="(1, 4096) float32", color=orange, style=filled]
-2765378798416 [label="Linear", color=lightblue, style=filled, shape=box]
-2765378798080 -> 2765378798416
-2765378681648 -> 2765378798416
-2765378681696 -> 2765378798416
-2765378798416 -> 2765378798224
-2765378798080 [label="(1, 4096) float32", color=orange, style=filled]
-2765378681648 [label="W: (4096, 4096) float32", color=orange, style=filled]
-2765378681696 [label="b: (4096,) float32", color=orange, style=filled]
-2765378798032 [label="Div", color=lightblue, style=filled, shape=box]
-2765378797888 -> 2765378798032
-2765378798608 -> 2765378798032
-2765378798032 -> 2765378798080
-2765378797888 [label="(1, 4096) float32", color=orange, style=filled]
-2765378798608 [label="() float32", color=orange, style=filled]
-2765378798272 [label="Mul", color=lightblue, style=filled, shape=box]
-2765378798368 -> 2765378798272
-2765378797984 -> 2765378798272
-2765378798272 -> 2765378797888
-2765378798368 [label="(1, 4096) float32", color=orange, style=filled]
-2765378797984 [label="(1, 4096) bool", color=orange, style=filled]
-2765378798512 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378798464 -> 2765378798512
-2765378798512 -> 2765378798368
-2765378798464 [label="(1, 4096) float32", color=orange, style=filled]
-2765378798944 [label="Linear", color=lightblue, style=filled, shape=box]
-2765378798752 -> 2765378798944
-2765378681552 -> 2765378798944
-2765373817776 -> 2765378798944
-2765378798944 -> 2765378798464
-2765378798752 [label="(1, 25088) float32", color=orange, style=filled]
-2765378681552 [label="W: (25088, 4096) float32", color=orange, style=filled]
-2765373817776 [label="b: (4096,) float32", color=orange, style=filled]
-2765378798704 [label="Reshape", color=lightblue, style=filled, shape=box]
-2765378798848 -> 2765378798704
-2765378798704 -> 2765378798752
-2765378798848 [label="(1, 512, 7, 7) float32", color=orange, style=filled]
-2765378799184 [label="Pooling", color=lightblue, style=filled, shape=box]
-2765378799040 -> 2765378799184
-2765378799184 -> 2765378798848
-2765378799040 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378799088 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378799328 -> 2765378799088
-2765378799088 -> 2765378799040
-2765378799328 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378799424 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378799520 -> 2765378799424
-2765378681456 -> 2765378799424
-2765378681504 -> 2765378799424
-2765378799424 -> 2765378799328
-2765378799520 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378681456 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
-2765378681504 [label="b: (512,) float32", color=orange, style=filled]
-2765378799616 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378799760 -> 2765378799616
-2765378799616 -> 2765378799520
-2765378799760 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378799664 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378799712 -> 2765378799664
-2765378681312 -> 2765378799664
-2765378681360 -> 2765378799664
-2765378799664 -> 2765378799760
-2765378799712 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378681312 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
-2765378681360 [label="b: (512,) float32", color=orange, style=filled]
-2765378800096 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378800000 -> 2765378800096
-2765378800096 -> 2765378799712
-2765378800000 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378800192 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378799856 -> 2765378800192
-2765378681168 -> 2765378800192
-2765378681216 -> 2765378800192
-2765378800192 -> 2765378800000
-2765378799856 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
-2765378681168 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
-2765378681216 [label="b: (512,) float32", color=orange, style=filled]
-2765378800288 [label="Pooling", color=lightblue, style=filled, shape=box]
-2765378800336 -> 2765378800288
-2765378800288 -> 2765378799856
-2765378800336 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
-2765378800480 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378800672 -> 2765378800480
-2765378800480 -> 2765378800336
-2765378800672 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
-2765378800432 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378800576 -> 2765378800432
-2765378681024 -> 2765378800432
-2765378681072 -> 2765378800432
-2765378800432 -> 2765378800672
-2765378800576 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
-2765378681024 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
-2765378681072 [label="b: (512,) float32", color=orange, style=filled]
-2765378800768 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378800912 -> 2765378800768
-2765378800768 -> 2765378800576
-2765378800912 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
-2765378800816 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378800864 -> 2765378800816
-2765378680880 -> 2765378800816
-2765378680928 -> 2765378800816
-2765378800816 -> 2765378800912
-2765378800864 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
-2765378680880 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
-2765378680928 [label="b: (512,) float32", color=orange, style=filled]
-2765378801056 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378801248 -> 2765378801056
-2765378801056 -> 2765378800864
-2765378801248 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
-2765378801008 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378801152 -> 2765378801008
-2765378680736 -> 2765378801008
-2765378680784 -> 2765378801008
-2765378801008 -> 2765378801248
-2765378801152 [label="(1, 256, 28, 28) float32", color=orange, style=filled]
-2765378680736 [label="W: (512, 256, 3, 3) float32", color=orange, style=filled]
-2765378680784 [label="b: (512,) float32", color=orange, style=filled]
-2765378801488 [label="Pooling", color=lightblue, style=filled, shape=box]
-2765378801344 -> 2765378801488
-2765378801488 -> 2765378801152
-2765378801344 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
-2765378801440 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378801392 -> 2765378801440
-2765378801440 -> 2765378801344
-2765378801392 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
-2765378801824 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378801632 -> 2765378801824
-2765378680592 -> 2765378801824
-2765378680640 -> 2765378801824
-2765378801824 -> 2765378801392
-2765378801632 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
-2765378680592 [label="W: (256, 256, 3, 3) float32", color=orange, style=filled]
-2765378680640 [label="b: (256,) float32", color=orange, style=filled]
-2765378801728 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378801584 -> 2765378801728
-2765378801728 -> 2765378801632
-2765378801584 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
-2765378802064 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378801920 -> 2765378802064
-2765378680448 -> 2765378802064
-2765378680496 -> 2765378802064
-2765378802064 -> 2765378801584
-2765378801920 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
-2765378680448 [label="W: (256, 256, 3, 3) float32", color=orange, style=filled]
-2765378680496 [label="b: (256,) float32", color=orange, style=filled]
-2765378802016 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378801968 -> 2765378802016
-2765378802016 -> 2765378801920
-2765378801968 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
-2765378802400 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378802208 -> 2765378802400
-2765378680304 -> 2765378802400
-2765378680352 -> 2765378802400
-2765378802400 -> 2765378801968
-2765378802208 [label="(1, 128, 56, 56) float32", color=orange, style=filled]
-2765378680304 [label="W: (256, 128, 3, 3) float32", color=orange, style=filled]
-2765378680352 [label="b: (256,) float32", color=orange, style=filled]
-2765378802160 [label="Pooling", color=lightblue, style=filled, shape=box]
-2765378802304 -> 2765378802160
-2765378802160 -> 2765378802208
-2765378802304 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
-2765378802496 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378802640 -> 2765378802496
-2765378802496 -> 2765378802304
-2765378802640 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
-2765378802544 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378802592 -> 2765378802544
-2765378680160 -> 2765378802544
-2765378680208 -> 2765378802544
-2765378802544 -> 2765378802640
-2765378802592 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
-2765378680160 [label="W: (128, 128, 3, 3) float32", color=orange, style=filled]
-2765378680208 [label="b: (128,) float32", color=orange, style=filled]
-2765378802784 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378802976 -> 2765378802784
-2765378802784 -> 2765378802592
-2765378802976 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
-2765378802736 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378802880 -> 2765378802736
-2765378679968 -> 2765378802736
-2765378680064 -> 2765378802736
-2765378802736 -> 2765378802976
-2765378802880 [label="(1, 64, 112, 112) float32", color=orange, style=filled]
-2765378679968 [label="W: (128, 64, 3, 3) float32", color=orange, style=filled]
-2765378680064 [label="b: (128,) float32", color=orange, style=filled]
-2765378803216 [label="Pooling", color=lightblue, style=filled, shape=box]
-2765378803072 -> 2765378803216
-2765378803216 -> 2765378802880
-2765378803072 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
-2765378803168 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378803120 -> 2765378803168
-2765378803168 -> 2765378803072
-2765378803120 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
-2765378803552 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378803360 -> 2765378803552
-2765375088080 -> 2765378803552
-2765378565664 -> 2765378803552
-2765378803552 -> 2765378803120
-2765378803360 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
-2765375088080 [label="W: (64, 64, 3, 3) float32", color=orange, style=filled]
-2765378565664 [label="b: (64,) float32", color=orange, style=filled]
-2765378803456 [label="ReLu", color=lightblue, style=filled, shape=box]
-2765378803792 -> 2765378803456
-2765378803456 -> 2765378803360
-2765378803792 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
-2765375392176 [label="Conv2d", color=lightblue, style=filled, shape=box]
-2765378803312 -> 2765375392176
-2765336917248 -> 2765375392176
-2765336918112 -> 2765375392176
-2765375392176 -> 2765378803792
-2765378803312 [label="(1, 3, 224, 224) float32", color=orange, style=filled]
-2765336917248 [label="W: (64, 3, 3, 3) float32", color=orange, style=filled]
-2765336918112 [label="b: (64,) float32", color=orange, style=filled]
+2143249344576 [label="(1, 1000) float32", color=orange, style=filled]
+2143249344384 [label="Linear", color=lightblue, style=filled, shape=box]
+2143249344480 -> 2143249344384
+2143249169200 -> 2143249344384
+2143249169248 -> 2143249344384
+2143249344384 -> 2143249344576
+2143249344480 [label="(1, 4096) float32", color=orange, style=filled]
+2143249169200 [label="W: (4096, 1000) float32", color=orange, style=filled]
+2143249169248 [label="b: (1000,) float32", color=orange, style=filled]
+2143249344240 [label="Div", color=lightblue, style=filled, shape=box]
+2143249344336 -> 2143249344240
+2143249344432 -> 2143249344240
+2143249344240 -> 2143249344480
+2143249344336 [label="(1, 4096) float32", color=orange, style=filled]
+2143249344432 [label="() float32", color=orange, style=filled]
+2143249344144 [label="Mul", color=lightblue, style=filled, shape=box]
+2143249344192 -> 2143249344144
+2143249344288 -> 2143249344144
+2143249344144 -> 2143249344336
+2143249344192 [label="(1, 4096) float32", color=orange, style=filled]
+2143249344288 [label="(1, 4096) bool", color=orange, style=filled]
+2143249334592 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249334544 -> 2143249334592
+2143249334592 -> 2143249344192
+2143249334544 [label="(1, 4096) float32", color=orange, style=filled]
+2143249334688 [label="Linear", color=lightblue, style=filled, shape=box]
+2143249334496 -> 2143249334688
+2143249169056 -> 2143249334688
+2143249169104 -> 2143249334688
+2143249334688 -> 2143249334544
+2143249334496 [label="(1, 4096) float32", color=orange, style=filled]
+2143249169056 [label="W: (4096, 4096) float32", color=orange, style=filled]
+2143249169104 [label="b: (4096,) float32", color=orange, style=filled]
+2143205554176 [label="Div", color=lightblue, style=filled, shape=box]
+2143249334400 -> 2143205554176
+2143249334448 -> 2143205554176
+2143205554176 -> 2143249334496
+2143249334400 [label="(1, 4096) float32", color=orange, style=filled]
+2143249334448 [label="() float32", color=orange, style=filled]
+2143249334352 [label="Mul", color=lightblue, style=filled, shape=box]
+2143249334784 -> 2143249334352
+2143249334736 -> 2143249334352
+2143249334352 -> 2143249334400
+2143249334784 [label="(1, 4096) float32", color=orange, style=filled]
+2143249334736 [label="(1, 4096) bool", color=orange, style=filled]
+2143249335024 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249334880 -> 2143249335024
+2143249335024 -> 2143249334784
+2143249334880 [label="(1, 4096) float32", color=orange, style=filled]
+2143249334928 [label="Linear", color=lightblue, style=filled, shape=box]
+2143249334976 -> 2143249334928
+2143245242912 -> 2143249334928
+2143247090656 -> 2143249334928
+2143249334928 -> 2143249334880
+2143249334976 [label="(1, 25088) float32", color=orange, style=filled]
+2143245242912 [label="W: (25088, 4096) float32", color=orange, style=filled]
+2143247090656 [label="b: (4096,) float32", color=orange, style=filled]
+2143249335264 [label="Reshape", color=lightblue, style=filled, shape=box]
+2143249335120 -> 2143249335264
+2143249335264 -> 2143249334976
+2143249335120 [label="(1, 512, 7, 7) float32", color=orange, style=filled]
+2143249335312 [label="Pooling", color=lightblue, style=filled, shape=box]
+2143249335216 -> 2143249335312
+2143249335312 -> 2143249335120
+2143249335216 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249335552 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249335408 -> 2143249335552
+2143249335552 -> 2143249335216
+2143249335408 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249335648 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249335504 -> 2143249335648
+2143249168912 -> 2143249335648
+2143249168960 -> 2143249335648
+2143249335648 -> 2143249335408
+2143249335504 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249168912 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
+2143249168960 [label="b: (512,) float32", color=orange, style=filled]
+2143249335744 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249335888 -> 2143249335744
+2143249335744 -> 2143249335504
+2143249335888 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249336128 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249335936 -> 2143249336128
+2143249168768 -> 2143249336128
+2143249168816 -> 2143249336128
+2143249336128 -> 2143249335888
+2143249335936 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249168768 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
+2143249168816 [label="b: (512,) float32", color=orange, style=filled]
+2143249336080 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249336224 -> 2143249336080
+2143249336080 -> 2143249335936
+2143249336224 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249336320 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249336416 -> 2143249336320
+2143249168624 -> 2143249336320
+2143249168672 -> 2143249336320
+2143249336320 -> 2143249336224
+2143249336416 [label="(1, 512, 14, 14) float32", color=orange, style=filled]
+2143249168624 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
+2143249168672 [label="b: (512,) float32", color=orange, style=filled]
+2143249336512 [label="Pooling", color=lightblue, style=filled, shape=box]
+2143249336464 -> 2143249336512
+2143249336512 -> 2143249336416
+2143249336464 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
+2143249336560 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249336656 -> 2143249336560
+2143249336560 -> 2143249336464
+2143249336656 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
+2143249336992 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249336800 -> 2143249336992
+2143249168480 -> 2143249336992
+2143249168528 -> 2143249336992
+2143249336992 -> 2143249336656
+2143249336800 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
+2143249168480 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
+2143249168528 [label="b: (512,) float32", color=orange, style=filled]
+2143249336896 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249337040 -> 2143249336896
+2143249336896 -> 2143249336800
+2143249337040 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
+2143249337280 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249337088 -> 2143249337280
+2143249168336 -> 2143249337280
+2143249168384 -> 2143249337280
+2143249337280 -> 2143249337040
+2143249337088 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
+2143249168336 [label="W: (512, 512, 3, 3) float32", color=orange, style=filled]
+2143249168384 [label="b: (512,) float32", color=orange, style=filled]
+2143249337136 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249337232 -> 2143249337136
+2143249337136 -> 2143249337088
+2143249337232 [label="(1, 512, 28, 28) float32", color=orange, style=filled]
+2143249337568 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249337376 -> 2143249337568
+2143249168192 -> 2143249337568
+2143249168240 -> 2143249337568
+2143249337568 -> 2143249337232
+2143249337376 [label="(1, 256, 28, 28) float32", color=orange, style=filled]
+2143249168192 [label="W: (512, 256, 3, 3) float32", color=orange, style=filled]
+2143249168240 [label="b: (512,) float32", color=orange, style=filled]
+2143249337616 [label="Pooling", color=lightblue, style=filled, shape=box]
+2143249337472 -> 2143249337616
+2143249337616 -> 2143249337376
+2143249337472 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
+2143249337664 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249337856 -> 2143249337664
+2143249337664 -> 2143249337472
+2143249337856 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
+2143249337808 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249337712 -> 2143249337808
+2143249168048 -> 2143249337808
+2143249168096 -> 2143249337808
+2143249337808 -> 2143249337856
+2143249337712 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
+2143249168048 [label="W: (256, 256, 3, 3) float32", color=orange, style=filled]
+2143249168096 [label="b: (256,) float32", color=orange, style=filled]
+2143249337952 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249338144 -> 2143249337952
+2143249337952 -> 2143249337712
+2143249338144 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
+2143249338192 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249338048 -> 2143249338192
+2143249167904 -> 2143249338192
+2143249167952 -> 2143249338192
+2143249338192 -> 2143249338144
+2143249338048 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
+2143249167904 [label="W: (256, 256, 3, 3) float32", color=orange, style=filled]
+2143249167952 [label="b: (256,) float32", color=orange, style=filled]
+2143249338240 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249338432 -> 2143249338240
+2143249338240 -> 2143249338048
+2143249338432 [label="(1, 256, 56, 56) float32", color=orange, style=filled]
+2143249338384 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249338288 -> 2143249338384
+2143249167760 -> 2143249338384
+2143249167808 -> 2143249338384
+2143249338384 -> 2143249338432
+2143249338288 [label="(1, 128, 56, 56) float32", color=orange, style=filled]
+2143249167760 [label="W: (256, 128, 3, 3) float32", color=orange, style=filled]
+2143249167808 [label="b: (256,) float32", color=orange, style=filled]
+2143249338720 [label="Pooling", color=lightblue, style=filled, shape=box]
+2143249338528 -> 2143249338720
+2143249338720 -> 2143249338288
+2143249338528 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
+2143249338624 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249338768 -> 2143249338624
+2143249338624 -> 2143249338528
+2143249338768 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
+2143249339008 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249338816 -> 2143249339008
+2143249167616 -> 2143249339008
+2143249167664 -> 2143249339008
+2143249339008 -> 2143249338768
+2143249338816 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
+2143249167616 [label="W: (128, 128, 3, 3) float32", color=orange, style=filled]
+2143249167664 [label="b: (128,) float32", color=orange, style=filled]
+2143249338864 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249338960 -> 2143249338864
+2143249338864 -> 2143249338816
+2143249338960 [label="(1, 128, 112, 112) float32", color=orange, style=filled]
+2143249339296 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249339104 -> 2143249339296
+2143249167424 -> 2143249339296
+2143249167520 -> 2143249339296
+2143249339296 -> 2143249338960
+2143249339104 [label="(1, 64, 112, 112) float32", color=orange, style=filled]
+2143249167424 [label="W: (128, 64, 3, 3) float32", color=orange, style=filled]
+2143249167520 [label="b: (128,) float32", color=orange, style=filled]
+2143249339344 [label="Pooling", color=lightblue, style=filled, shape=box]
+2143249339200 -> 2143249339344
+2143249339344 -> 2143249339104
+2143249339200 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
+2143249339392 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249339584 -> 2143249339392
+2143249339392 -> 2143249339200
+2143249339584 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
+2143249339536 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249339440 -> 2143249339536
+2143249023344 -> 2143249339536
+2143249036976 -> 2143249339536
+2143249339536 -> 2143249339584
+2143249339440 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
+2143249023344 [label="W: (64, 64, 3, 3) float32", color=orange, style=filled]
+2143249036976 [label="b: (64,) float32", color=orange, style=filled]
+2143249339680 [label="ReLu", color=lightblue, style=filled, shape=box]
+2143249339920 -> 2143249339680
+2143249339680 -> 2143249339440
+2143249339920 [label="(1, 64, 224, 224) float32", color=orange, style=filled]
+2143246283168 [label="Conv2d", color=lightblue, style=filled, shape=box]
+2143249339872 -> 2143246283168
+2143248595616 -> 2143246283168
+2143248306336 -> 2143246283168
+2143246283168 -> 2143249339920
+2143249339872 [label="(1, 3, 224, 224) float32", color=orange, style=filled]
+2143248595616 [label="W: (64, 3, 3, 3) float32", color=orange, style=filled]
+2143248306336 [label="b: (64,) float32", color=orange, style=filled]
 }
